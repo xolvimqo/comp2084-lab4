@@ -1,0 +1,28 @@
+﻿@model IEnumerable<PhoneApplication.Models.Phone>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayName(item.PhoneName) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.PhoneID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PhoneID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PhoneID })
+        </td>
+    </tr>
+}
+
+</table>
