@@ -2,26 +2,41 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PhoneApplication.Models
 {
     public class Phone
     {
-        public int PhoneID;
-        public string PhoneName;
-        public string Manufacturer;
-        public string MSRP;
-        public string ScreenSize;
-        public DateTime DateRealeased;
+        [Key]
+        public int PhoneID { get; set; }
+        public string PhoneName { get; set; }
+        public virtual Manufacturer Manufacturer { get; set; }
+        public int MSRP { get; set; }
+        public string ScreenSize { get; set; }
+        public DateTime DateReleased { get; set; }
+        [ForeignKey("Manufacturer")]
+        public int ManufacturerID { get; set; }
 
-        public Phone(int phoneID, string phoneName, string manufacturer, string mSRP, string screenSize, DateTime dateRealeased)
+        public Phone(int phoneID, string phoneName, int mSRP, string screenSize, DateTime dateReleased, int manufacturerID)
         {
             PhoneID = phoneID;
             PhoneName = phoneName;
-            Manufacturer = manufacturer;
             MSRP = mSRP;
             ScreenSize = screenSize;
-            DateRealeased = dateRealeased;
+            DateReleased = dateReleased;
+            ManufacturerID = manufacturerID;
         }
+
+        public Phone(string phoneName, int mSRP, DateTime dateReleased, int manufacturerID)
+        {
+            PhoneName = phoneName;
+            MSRP = mSRP;
+            DateReleased = dateReleased;
+            ManufacturerID = manufacturerID;
+        }
+
+        public Phone() { }
     }
 }
